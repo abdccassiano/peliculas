@@ -1,24 +1,26 @@
 import logo from './logo.svg';
 import './App.css';
+import Pelicula from './Pelicula';
+import PageWrapper from './PageWrapper';
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <PageWrapper>
+
+      <Pelicula titulo="into the wild (2014)" calificacion="7.8" 
+        director="Joss Whedon" actores="Robert Downey Jr., Chris Evans, Chris Hemsworth" 
+        fecha="1 May 2015" duracion="2h 21min" img="images/uploads/mv1.jpg">
+          Earth's mightiest heroes must come together and learn to fight as a team if they are to stop the mischievous Loki and his alien army from enslaving humanity...
+        </Pelicula>
+
+        <Pelicula titulo="oblivion (2012)" calificacion="8.1" 
+        director="Joss Whedon" actores="Robert Downey Jr., Chris Evans, Chris Hemsworth" 
+        fecha="1 May 2015" duracion="2h 21min" img="images/uploads/mv2.jpg">
+          Earth's mightiest heroes must come together and learn to fight as a team if they are to stop the mischievous Loki and his alien army from enslaving humanity...
+        </Pelicula>
+
+    </PageWrapper>
   );
 }
 
