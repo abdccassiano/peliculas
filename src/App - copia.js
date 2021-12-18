@@ -4,24 +4,19 @@ import Pelicula from './Pelicula';
 import PageWrapper from './PageWrapper';
 import PeliculasJson from './Peliculas.json';
 import Paginacion from './Paginacion'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 function App() {
 
   const [paginaActual, setPaginaActual] = useState(1);
-  const [peliculas, setPeliculas] = useState([]);
+  //const [peliculas, setPeliculas] = useState([]);
   const TOTAL_POR_PAGINA = 7;
 
-  useEffect(() => {
-    buscarPeliculas();
-  }, []);
-
   //Extraemos un json en local
-  //let peliculas = PeliculasJson;
+  let peliculas = PeliculasJson;
 
   const buscarPeliculas = async () => {
-    //let url = 'https://cors-anywhere.herokuapp.com/https://raw.githubusercontent.com/lucasmoy-dev/Curso-de-React/main/Proyecto%202%20-%20Web%20de%20Peliculas/Proyecto%20Terminado/src/peliculas.json';
-    let url = 'https://cors-anywhere.herokuapp.com/https://lucasmoy.dev/data/react/peliculas.json';
+    let url = 'https://lucasmoy.dev/data/react/peliculas.json';
 
     // https://cors-anywhere.herokuapp.com/ para solucionar los cords se coloca esta página antes de la url
 
@@ -35,33 +30,37 @@ function App() {
       }
     });*/
 
-    let respuesta = await fetch(url, {
-      "method": 'GET',
+    var respuesta = await fetch(url, {
+      "method": "GET",
+      "mode": "no-cors",
       "headers": {
         "Accept": 'application/json',
-        "Content-Type": 'application/json',
-        'Origin': 'https://raw.githubusercontent.com/'
+        "Content-Type": 'application/json'
       }
     });
-    
+
     let json = await respuesta.json();
-    setPeliculas(json);
+    //setPeliculas(json);
   }
 
-    const getTotalPaginas = () => {
-      let cantidadTotalDePeliculas = peliculas.length;
-      return Math.ceil(cantidadTotalDePeliculas / TOTAL_POR_PAGINA);
-    }
+  //buscarPeliculas();
 
-    let peliculasPorPagina = peliculas.slice(
+  const cargarPeliculas = () => {
+    peliculas = peliculas.slice(
       (paginaActual - 1) * TOTAL_POR_PAGINA, 
       paginaActual * TOTAL_POR_PAGINA
       );
+  }
+    const getTotalPaginas = () => {
+      let cantidadTotalDePeliculas = PeliculasJson.length;
+      return Math.ceil(cantidadTotalDePeliculas / TOTAL_POR_PAGINA);
+    }
 
+    cargarPeliculas();
   return (
     <PageWrapper>
 
-      {peliculasPorPagina.map(pelicula => {
+      {peliculas.map(pelicula => {
         return (
         <Pelicula titulo={pelicula.titulo} calificacion={pelicula.calificacion} 
         director={pelicula.director} actores={pelicula.actores} fecha={pelicula.fecha} 
